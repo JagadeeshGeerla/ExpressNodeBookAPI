@@ -11,7 +11,7 @@ const port = process.env.port || 3000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());     //json(), not json
 
-const bookRouter = require('./Routes/bookRoutes')(Book); // Invoke - to get bookRouter // Also, inject Book 
+const bookRouter = require('./Routes/bookRoutes')(Book); // Invoke to get bookRouter.Also,inject Book 
 
 app.use('/api/Books', bookRouter);
 
