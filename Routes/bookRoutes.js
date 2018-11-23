@@ -43,22 +43,19 @@ var routes = function (Book) {
             res.json(req.book);     // Note its req.book, not res.book
         })
         .put(function (req, res) {
-            Book.findById(req.params.bookId, function (err, book) {
-                req.book.title = req.body.title;
-                req.book.author = req.body.author;
-                req.book.genre = req.body.genre;
-                req.book.read = req.body.read;
-                // These two lines are synchronous. Make it asynchronous
-                //req.book.save();  
-                //res.json(req.book);
-                req.book.save(function () {
-                    if(err) 
-                        res.status(500).send(err);
-                    else {
-                        res.json(req.book);
-                    }
-                });
-                
+            req.book.title = req.body.title;
+            req.book.author = req.body.author;
+            req.book.genre = req.body.genre;
+            req.book.read = req.body.read;
+            // These two lines are synchronous. Make it asynchronous
+            //req.book.save();  
+            //res.json(req.book);
+            req.book.save(function () {
+                if (err)
+                    res.status(500).send(err);
+                else {
+                    res.json(req.book);
+                }
             });
         })
         .patch(function (req, res) {
@@ -69,16 +66,16 @@ var routes = function (Book) {
                 req.book[key] = req.body[key];
             }
             req.book.save(function (err) {
-                if(err) 
+                if (err)
                     res.status(500).send(err);
                 else {
                     res.json(req.book);
                 }
             });
         })
-        .delete(function(req,res) {
-            req.book.remove(function(err) {
-                if(err) 
+        .delete(function (req, res) {
+            req.book.remove(function (err) {
+                if (err)
                     res.status(500).send(err);
                 else {
                     res.status(204).send('Removed');    //Status 204 - Removed
